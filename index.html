@@ -93,69 +93,16 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>基于hexo框架，且部署在github上的个人博客搭建方法。</p>
-<h1 id="一、环境配置"><a href="#一、环境配置" class="headerlink" title="一、环境配置"></a>一、环境配置</h1><p>hexo是基于Node.js的博客框架，可便捷地生成静态博客页面，并部署到github上。因此，搭建博客需要配置以下环境：① git；② 脚本语言node.js；③ hexo框架。</p>
-<p><strong>node.js</strong>：下载可以从其官方界面开始<a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/">https://nodejs.org/zh-cn/</a></p>
-<p><strong>Github</strong>：下载则可以从其官方界面开始<a target="_blank" rel="noopener" href="https://github.com/">https://github.com/</a></p>
-<p>按官网完成node.js与github的安装配置后，通过cmd确认安装是否成功。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br><span class="line">git --version</span><br></pre></td></tr></table></figure>
-
-<p>确认配置成功后，安装hexo，并确认是否安装成功。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
-
-<p>完成配置后，在本地创建文件夹，作为博客的根目录。</p>
-<h1 id="二、Github搭建仓库"><a href="#二、Github搭建仓库" class="headerlink" title="二、Github搭建仓库"></a>二、Github搭建仓库</h1><p>在github上创建仓库，作为博客的服务器并存储内容。</p>
-<p><strong>注意点：</strong></p>
-<p>① 命名仓库名称时，格式应为“xxxxx.github.io”。其中，”xxxxx”为个人命名，之后为固定格式。固定格式不能修改，只有这样部署到github page时，才会被识别。</p>
-<p>② 个人命名最好与github用户名保持一致，可以避免后续更改网站配置文件的地址。如不同，后续地址配置需修改root字段。仓库命名可以在github上直接修改，无需重新创建。</p>
-<h1 id="三、配置密钥"><a href="#三、配置密钥" class="headerlink" title="三、配置密钥"></a>三、配置密钥</h1><p>为了将github与本地相关联，需要进行密钥的配置。</p>
-<p>注：初次安装git需配置用户名与邮箱，在git bash界面输入如下命令。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;xx&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;xx&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="配置-SSH-Key-免密登录步骤"><a href="#配置-SSH-Key-免密登录步骤" class="headerlink" title="配置 SSH Key 免密登录步骤"></a>配置 SSH Key 免密登录步骤</h2><p>① 在本地文件夹，右键进入git bash；</p>
-<p>② 安装ssh；</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh</span><br></pre></td></tr></table></figure>
-
-<p>③ 生成.ssh密钥目录；</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C XX@qq.com <span class="comment">#github注册邮箱</span></span><br></pre></td></tr></table></figure>
-
-<p>④ 根据生成路径，打开id_rsa.pub，复制文字；</p>
-<p>⑤ 打开github settings ，添加SSH Keys；</p>
-<p>⑥ 确认是否绑定成功。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com #注册邮箱</span><br></pre></td></tr></table></figure>
-
-<h1 id="四、本地生成博客文件"><a href="#四、本地生成博客文件" class="headerlink" title="四、本地生成博客文件"></a>四、本地生成博客文件</h1><h2 id="本地博客文件创建步骤"><a href="#本地博客文件创建步骤" class="headerlink" title="本地博客文件创建步骤"></a>本地博客文件创建步骤</h2><p>① 在本地创建文件夹作为本地存储目录；</p>
-<p>② 在git bash界面下，进行初始化；</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
-
-<p>③ 输入下述命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean  <span class="comment">#清空已有hexo网站文件</span></span><br><span class="line">hexo g      <span class="comment">#依据网页文本与css样式生成网站文件</span></span><br><span class="line">hexo s      <span class="comment">#启动本地服务器，在localhost:4000查看网站效果</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="五、发布到Github"><a href="#五、发布到Github" class="headerlink" title="五、发布到Github"></a>五、发布到Github</h1><h2 id="发布本地网站文件步骤"><a href="#发布本地网站文件步骤" class="headerlink" title="发布本地网站文件步骤"></a>发布本地网站文件步骤</h2><p>① 修改网站配置文件。在根目录里找到”_config.yml”并打开。</p>
-<p>修改URL</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># URL</span><br><span class="line">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span><br><span class="line">##如果仓库命名与github用户名不同，则此处需要定义root，相同则不需要。</span><br><span class="line">url: http://    #填写个人网站地址</span><br><span class="line">root: /Myblog.github.io</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">permalink_defaults:</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: true # Set to false to remove trailing &#x27;index.html&#x27; from permalinks</span><br><span class="line">  trailing_html: true # Set to false to remove trailing &#x27;.html&#x27; from permalinks</span><br></pre></td></tr></table></figure>
-
-<p>修改deploy</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository:       *此处地址为下载/克隆项目的地址，github仓库中可查</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure>
-
-<p>② 安装自动部署发布工具。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<p>③ 生成页面并发布。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo d   <span class="comment">#上传github</span></span><br></pre></td></tr></table></figure>
-
-<p>④ 初次发布需要验证账户。</p>
-<p>在弹出的窗口输入用户名–输入令牌</p>
-<p><strong>注意点：</strong></p>
-<p>① “:”后有一个空格，不可省却。</p>
-<p>② 当仓库名称与github用户名不同时，需要定义root。URL并不是所在仓库的地址，而应该是启动仓库的Github Page服务后分配给你的网站静态域名。例如：仓库地址为<a target="_blank" rel="noopener" href="https://github.com/Anye111/Myblog.github.io.git%EF%BC%8C%E7%BD%91%E7%AB%99URL%E5%BA%94%E4%B8%BA%E2%80%9C%E6%9C%8D%E5%8A%A1%E2%80%93Github">https://github.com/Anye111/Myblog.github.io.git，网站URL应为“服务–Github</a> Page”启动&#x2F;更新后显示的网站地址：<a href="https://anye111.github.io/Myblog.github.io/">https://Anye111.github.io/Myblog.github.io/</a>   root: &#x2F;Myblog.github.io  </p>
-<p>③ 上传失败可能是github问题，多试几次。</p>
-<p>④ 令牌获取：github上打开 Settings &#x2F; Developer settings &#x2F; Personal access tokens，创建新令牌。注：令牌只有创建时显示一次，之后会隐藏</p>
-
+        <p>基于hexo框架，并将服务器部署在github的个人博客搭建方法。</p>
+        
+          <p class="article-more-link">
+            <a href="/Myblog.github.io/2022/07/15/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://anye111.github.io/Myblog.github.io/2022/07/15/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" data-id="cl5mm3t1y0000ukvjfddj81mn" data-title="搭建个人博客" class="article-share-link">分享</a>
+      <a data-url="https://anye111.github.io/Myblog.github.io/2022/07/15/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" data-id="cl5mmb4nl0001p4vj4gzg5xxw" data-title="搭建个人博客" class="article-share-link">分享</a>
       
       
       
@@ -208,7 +155,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://anye111.github.io/Myblog.github.io/2022/07/14/hello-world/" data-id="cl5mlwv6j0000p0vja6vphu2b" data-title="Hello World" class="article-share-link">分享</a>
+      <a data-url="https://anye111.github.io/Myblog.github.io/2022/07/14/hello-world/" data-id="cl5mmb4nc0000p4vj7ilkekrz" data-title="Hello World" class="article-share-link">分享</a>
       
       
       
