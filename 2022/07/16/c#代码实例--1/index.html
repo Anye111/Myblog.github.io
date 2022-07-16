@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>c#代码实例--1 | 暗夜岛</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="判断一个范围内是否有真素数。真素数：素数倒叙仍为素数。输入：一个整数范围。输出：有，则输出该数；无，则输出NO。关键点：倒序、标志位、方法使用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c#代码实例--1">
+<meta property="og:url" content="https://anye111.github.io/Myblog.github.io/2022/07/16/c#%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B--1/index.html">
+<meta property="og:site_name" content="暗夜岛">
+<meta property="og:description" content="判断一个范围内是否有真素数。真素数：素数倒叙仍为素数。输入：一个整数范围。输出：有，则输出该数；无，则输出NO。关键点：倒序、标志位、方法使用。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-16T03:03:56.000Z">
+<meta property="article:modified_time" content="2022-07-16T03:10:28.032Z">
+<meta property="article:author" content="暗夜">
+<meta property="article:tag" content="c#">
+<meta property="article:tag" content="代码实例">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/Myblog.github.io/atom.xml" title="暗夜岛" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/Myblog.github.io/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/Myblog.github.io/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/Myblog.github.io/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Myblog.github.io/" id="logo">暗夜岛</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Myblog.github.io/">Home</a>
+        
+          <a class="main-nav-link" href="/Myblog.github.io/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Myblog.github.io/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://Anye111.github.io/Myblog.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-c#代码实例--1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/Myblog.github.io/2022/07/16/c#%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B--1/" class="article-date">
+  <time class="dt-published" datetime="2022-07-16T03:03:56.000Z" itemprop="datePublished">2022-07-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/Myblog.github.io/categories/c-%E5%AD%A6%E4%B9%A0/">c#学习</a>►<a class="article-category-link" href="/Myblog.github.io/categories/c-%E5%AD%A6%E4%B9%A0/%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B/">代码实例</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      c#代码实例--1
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>判断一个范围内是否有真素数。真素数：素数倒叙仍为素数。输入：一个整数范围。输出：有，则输出该数；无，则输出NO。关键点：倒序、标志位、方法使用。</p>
+<span id="more"></span>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line"><span class="function">​</span>    &#123;</span><br><span class="line">​      <span class="built_in">string</span> str = Console.ReadLine();<span class="comment">//输入范围</span></span><br><span class="line">​      <span class="built_in">string</span>[] strArray = str.Split(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line">​      <span class="built_in">int</span>[] intArray = <span class="keyword">new</span> <span class="built_in">int</span>[strArray.Length];</span><br><span class="line">​      <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; strArray.Length; i++)</span><br><span class="line">​      &#123;</span><br><span class="line">​        intArray[i] = Convert.ToInt32(strArray[i]);</span><br><span class="line">​      &#125;</span><br><span class="line">​      <span class="built_in">int</span> m = intArray[<span class="number">0</span>];<span class="comment">//获取范围</span></span><br><span class="line">​      <span class="built_in">int</span> n = intArray[<span class="number">1</span>];</span><br><span class="line">​      <span class="built_in">bool</span> total = <span class="literal">true</span>;<span class="comment">//标志位，判断是否具有真素数</span></span><br><span class="line">​      <span class="keyword">for</span>(<span class="built_in">int</span> i = m; i &lt;= n; i++)</span><br><span class="line">​      &#123;</span><br><span class="line">​        <span class="built_in">bool</span> judge = <span class="literal">true</span>;<span class="comment">//判断是否为素数</span></span><br><span class="line">​        <span class="keyword">for</span> (<span class="built_in">int</span> j = <span class="number">2</span>; j &lt; i; j++)</span><br><span class="line">​        &#123;</span><br><span class="line">​          <span class="keyword">if</span> (i % j == <span class="number">0</span>)</span><br><span class="line">​          &#123;</span><br><span class="line">​            judge = <span class="literal">false</span>;</span><br><span class="line">​            total = <span class="literal">false</span>;</span><br><span class="line">​            <span class="keyword">break</span>;</span><br><span class="line">​          &#125;</span><br><span class="line">​        &#125;</span><br><span class="line">​        <span class="keyword">if</span> (judge)</span><br><span class="line">​        &#123;</span><br><span class="line">​          <span class="built_in">int</span> reverse = <span class="number">0</span>;</span><br><span class="line">​           <span class="built_in">int</span> temp = i;</span><br><span class="line">​          <span class="keyword">while</span> (temp != <span class="number">0</span>)<span class="comment">//倒序</span></span><br><span class="line">​          &#123;</span><br><span class="line">​            reverse = reverse * <span class="number">10</span> + temp % <span class="number">10</span>;</span><br><span class="line">​            temp = temp / <span class="number">10</span>;</span><br><span class="line">​          &#125;</span><br><span class="line">​          <span class="built_in">bool</span> isSuFan = <span class="literal">true</span>;<span class="comment">//判断倒序数是否为素数</span></span><br><span class="line">​          <span class="keyword">for</span> (<span class="built_in">int</span> z = <span class="number">2</span>; z &lt; reverse; z++)</span><br><span class="line">​          &#123;</span><br><span class="line">​            <span class="keyword">if</span> (reverse % z == <span class="number">0</span>)</span><br><span class="line">​            &#123;</span><br><span class="line">​              isSuFan = <span class="literal">false</span>;</span><br><span class="line">​              total = <span class="literal">false</span>;</span><br><span class="line">​              <span class="keyword">break</span>;</span><br><span class="line">​            &#125;</span><br><span class="line">​          &#125;</span><br><span class="line">​          <span class="keyword">if</span> (isSuFan == <span class="literal">true</span>)</span><br><span class="line">​          &#123;</span><br><span class="line">​            Console.Write(i + <span class="string">&quot; &quot;</span>);<span class="comment">//有真素数，输出真素数</span></span><br><span class="line">​          &#125;</span><br><span class="line">​        &#125;</span><br><span class="line">​    </span><br><span class="line">​      &#125;</span><br><span class="line">​      <span class="keyword">if</span> (total == <span class="literal">false</span>)<span class="comment">//无真素数，输出NO</span></span><br><span class="line">​      &#123;</span><br><span class="line">​        Console.Write(<span class="string">&quot;NO&quot;</span>);</span><br><span class="line">​      &#125;</span><br><span class="line">​      Console.ReadKey();</span><br><span class="line"> ​    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>重复的代码通过方法精简。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="built_in">bool</span> <span class="title">IsSu</span>(<span class="params"><span class="built_in">int</span> num</span>) <span class="comment">//判断是否为素数</span></span></span><br><span class="line"><span class="function">​</span>    &#123;</span><br><span class="line">​      <span class="built_in">bool</span> IsSu = <span class="literal">true</span>;</span><br><span class="line">​      <span class="keyword">for</span> (<span class="built_in">int</span> j = <span class="number">2</span>; j &lt; num; j++)</span><br><span class="line">​      &#123;</span><br><span class="line">​        <span class="keyword">if</span> (num % j == <span class="number">0</span>)</span><br><span class="line">​        &#123;</span><br><span class="line">​          IsSu = <span class="literal">false</span>;</span><br><span class="line">​          <span class="keyword">break</span>;</span><br><span class="line">​        &#125;</span><br><span class="line">​      &#125;</span><br><span class="line">​    &#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://anye111.github.io/Myblog.github.io/2022/07/16/c#%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B--1/" data-id="cl5nbakks0000lovjc7jhdmes" data-title="c#代码实例--1" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Myblog.github.io/tags/c/" rel="tag">c#</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Myblog.github.io/tags/%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B/" rel="tag">代码实例</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/Myblog.github.io/2022/07/15/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">搭建个人博客</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Myblog.github.io/categories/c-%E5%AD%A6%E4%B9%A0/">c#学习</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/Myblog.github.io/categories/c-%E5%AD%A6%E4%B9%A0/%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B/">代码实例</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/Myblog.github.io/tags/c/" rel="tag">c#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Myblog.github.io/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Myblog.github.io/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Myblog.github.io/tags/%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B/" rel="tag">代码实例</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Myblog.github.io/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Myblog.github.io/tags/c/" style="font-size: 10px;">c#</a> <a href="/Myblog.github.io/tags/github/" style="font-size: 10px;">github</a> <a href="/Myblog.github.io/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/Myblog.github.io/tags/%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B/" style="font-size: 10px;">代码实例</a> <a href="/Myblog.github.io/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Myblog.github.io/archives/2022/07/">七月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Myblog.github.io/2022/07/16/c#%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B--1/">c#代码实例--1</a>
+          </li>
+        
+          <li>
+            <a href="/Myblog.github.io/2022/07/15/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">搭建个人博客</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 暗夜<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Myblog.github.io/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Myblog.github.io/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/Myblog.github.io/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/Myblog.github.io/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/Myblog.github.io/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
